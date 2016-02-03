@@ -9,11 +9,16 @@ primary-schools.xls:
 primary-schools.csv: primary-schools.xls
 	xls2csv primary-schools.xls > primary-schools.csv
 
-primary-school-addresses.csv: primary-schools.csv
-	cat primary-schools.csv | sed 1d | csvcut -c 4,5,6,7,8 > primary-school-addresses.csv
+primary-schools-addresses.csv: primary-schools.csv
+	cat primary-schools.csv | sed 1d | csvcut -c 4,5,6,7,8 > primary-schools-addresses.csv
 
-primary-school-addresses-geocoded.csv: primary-school-addresses.csv
-	cat primary-school-addresses.csv | sed 1d | head | ./geocode.sh > primary-school-addresses-geocoded.csv
+primary-schools-addresses-geocoded.csv: primary-schools-addresses.csv
+	cat primary-schools-addresses.csv | sed 1d | ./geocode.sh > primary-schools-addresses-geocoded.csv
+
+primary-schools-areas.shp: primary-schools-addresses-geocoded.csv
+	-rm primary-schools-areas.*
+	python make-geocoded-address-shapefile.py primary-schools-addresses-geocoded.csv primary-schools-areas.geojson
+	ogr2ogr primary-schools-areas.shp primary-schools-areas.geojson
 
 
 current-schools.geojson:
@@ -39,5 +44,5 @@ Second-Level-Schools-List-2014-2015.xlsx:
 
 install:
 	sudo apt-get install catdoc gridsite-clients
-	pip install --user csvkit
+	pip install --user csvkit requests
 	npm install osmtogeojson
