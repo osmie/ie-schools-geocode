@@ -4,7 +4,7 @@ Correct as of Feb 2016.
 
 # Usage
 
-    make current-shapefiles primary-school-addresses-geocoded.csv
+    make current-shapefiles primary-schools-areas.shp
 
 # Copyright
 The code here is Copyright 2016 Rory McCann <rory@technomancy.org> and is licenced under the GNU Affero General Public Licence v3 (or later)
