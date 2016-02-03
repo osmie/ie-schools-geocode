@@ -43,6 +43,6 @@ Second-Level-Schools-List-2014-2015.xlsx:
 	wget https://www.education.ie/en/Publications/Statistics/Data-on-Individual-Schools/Second-Level-Schools-List-2014-2015.xlsx
 
 install:
-	sudo apt-get install catdoc gridsite-clients
+	sudo apt-get install catdoc gridsite-clients gdal-bin
 	pip install --user csvkit requests
 	npm install osmtogeojson
